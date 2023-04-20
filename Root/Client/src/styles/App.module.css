@@ -1,0 +1,262 @@
+.container {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  width: 100%;
+}
+
+#newchat {
+  background-color: transparent;
+  width: calc(100% - 16px);
+  border: rgba(255, 255, 255, 0.2) 1px solid;
+  color: white;
+  border-radius: 0.425rem;
+  padding: 12px;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  column-gap: 12px;
+  align-items: center;
+  margin: 8px;
+  margin-bottom: 0;
+}
+
+#newchat > svg {
+  color: rgb(217, 217, 227);
+}
+
+.sidebar {
+  width: 100%;
+  height: 100vh;
+  background-color: #202123;
+  padding: 0;
+  display: grid;
+  row-gap: 12px;
+  grid-template-rows: min-content 1fr max-content;
+}
+
+.messagesOuterContainer {
+  background-color: #343642;
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+#bottomBarTop {
+  display: grid;
+  grid-template-columns: 3fr 6fr 3fr;
+  width: 100%;
+}
+
+#bottomBarBottom {
+  text-align: center;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 16px;
+  font-size: 12px;
+  padding-bottom: 24px;
+  padding-top: 12px;
+}
+#bottomBar {
+  display: grid;
+  grid-template-rows: max-content max-content;
+  position: fixed;
+  bottom: 0px;
+  width: calc(100% - 250px);
+  background: linear-gradient(
+    0deg,
+    rgba(52, 54, 66, 1) 44%,
+    rgba(52, 54, 66, 0) 100%
+  );
+}
+
+#bottomDiv {
+  background-color: #343642;
+  height: 200px;
+}
+
+#regenerateBtn {
+  border-radius: 0.425rem;
+  padding: 8px;
+  cursor: pointer;
+  text-align: center;
+  background-color: #40414f;
+  color: white;
+  border: 1px solid #565869;
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
+  align-items: center;
+}
+
+#input {
+  border: rgba(32, 33, 35, 0.5) 1px solid;
+  border-radius: 6px;
+  width: 100%;
+  background-color: #40414f;
+  padding: 12px;
+  box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.11);
+}
+
+#inputTextArea {
+  background-color: transparent;
+  border: 0;
+  width: 100%;
+  color: white;
+  height: auto;
+  min-height: 24px; /* Minimum height of the textarea */
+  max-height: 200px; /* Maximum height of the textarea */
+  overflow-y: auto;
+  resize: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  line-height: 24px;
+}
+
+#inputForm {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#bottomCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+#sendButton {
+  color: rgb(142, 142, 160);
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.conversationButton {
+  background-color: transparent;
+  width: calc(100% - 16px);
+  border: 0;
+  color: white;
+  border-radius: 0.425rem;
+  padding: 12px;
+  cursor: pointer;
+  text-align: left;
+  display: grid;
+  grid-template-columns: min-content 12px 1fr max-content min-content;
+  align-items: center;
+  line-height: 20px;
+  font-size: 14px;
+  margin: 8px;
+  margin-top: 0;
+}
+
+.conversationButton > p {
+  max-width: 100%;
+  white-space: nowrap; /* keep the text on one line */
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.editConvoName {
+  padding: 0;
+  margin: 3px;
+  border: 0;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.editConvoName > svg {
+  color: rgb(217, 217, 227);
+}
+
+.convoButtons {
+  display: flex;
+  flex-direction: row;
+}
+
+.deleteConvo {
+  padding: 0;
+  margin: 3px;
+  border: 0;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.editNameInput {
+  background-color: transparent;
+  color: white;
+  border: blue 1px solid;
+  outline: none;
+  width: min-content;
+  padding: 0;
+}
+
+.deleteConvo > svg {
+  color: rgb(217, 217, 227);
+}
+
+.conversationButton > svg {
+  color: rgb(217, 217, 227);
+}
+
+.conversationButton:hover {
+  background-color: rgb(42, 43, 50);
+}
+
+#clearConversations:hover {
+  background-color: rgb(42, 43, 50);
+}
+
+#conversationsList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-bottom: rgba(255, 255, 255, 0.2) solid 1px;
+  overflow-y: auto;
+}
+
+.sidebarOptions {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1px;
+  overflow-y: auto;
+  width: 100%;
+  padding: 0;
+  border: 0;
+}
+
+#clearConversations {
+  background-color: transparent;
+  width: calc(100% - 16px);
+  border: 0;
+  color: white;
+  border-radius: 0.425rem;
+  padding: 12px;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
+  align-items: center;
+  line-height: 20px;
+  margin: 8px;
+  margin-top: 0px;
+  font-size: 14px;
+}

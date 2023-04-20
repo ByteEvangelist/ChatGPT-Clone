@@ -1,0 +1,67 @@
+#MainHeader {
+  color: rgb(236, 236, 241);
+  text-align: center;
+  font-weight: 600;
+  font-size: 36;
+}
+
+.SubHeader {
+  text-align: center;
+  color: rgb(236, 236, 241);
+  font-weight: 400;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 8px;
+}
+
+#container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: min-content min-content;
+  justify-items: center;
+  align-content: center;
+}
+
+#bottomDiv {
+  background-color: #343642;
+  height: 200px;
+}
+
+#centerDiv {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 50%;
+  gap: 14px;
+}
+
+.descTile {
+  color: rgb(236, 236, 241);
+  text-align: center;
+  font-size: 14px;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 14px;
+  width: 100%;
+  border: 0;
+  box-sizing: border-box;
+}
+
+button.descTile:hover {
+  background-color: rgb(32, 33, 35);
+}
+
+.tileList {
+  row-gap: 14px;
+  column-gap: 14px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: auto;
+}
