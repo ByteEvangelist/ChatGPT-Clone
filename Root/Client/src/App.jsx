@@ -17,6 +17,8 @@ function App() {
   const [editText, setEditText] = useState('');
   const messagesOuterDiv = useRef(null);
   const [receivingMessage, setReceivingMessage] = useState(false);
+  const postMessagesController = useRef(null);
+  const getNameConvoController = useRef(null);
 
   const newConversation = () => {
     setConversations((convs) => {
@@ -95,6 +97,11 @@ function App() {
   };
 
   const postMessages = async (messagesToPost) => {
+    if (postMessagesController.current) {
+      postMessagesController.current.abort();
+    }
+
+    postMessagesController.current = new AbortController();
     const response = await fetch('http://localhost:3000/', {
       method: 'POST',
       headers: {
@@ -108,6 +115,7 @@ function App() {
         },
         ...messagesToPost,
       ]),
+      signal: postMessagesController.current.signal,
     });
 
     let assistantResponseText = '';
@@ -131,6 +139,8 @@ function App() {
         if (lines[i].startsWith(':')) continue; // ignore comment message
         if (lines[i] === 'data: [DONE]') {
           setReceivingMessage(false);
+          console.log('done');
+          reader.cancel();
           return;
         } // end of message
         try {
@@ -140,6 +150,7 @@ function App() {
           if (convIndexRef.current == index) {
             editMessage(messagesToPost.length, assistantResponseText);
           } else {
+            console.log('safhldjk');
             setConversations((convs) => {
               let newConvs = [...convs];
               newConvs[index].msgs = [...newConvs[index].msgs];
@@ -150,14 +161,31 @@ function App() {
             });
           }
         } catch (e) {
-          console.log(e);
+          console.error(e);
         }
       }
       return reader.read().then(processText);
     });
   };
 
+  useEffect(() => {
+    const regex = /^New Chat \d+$/;
+    if (
+      !receivingMessage &&
+      messages.length >= 2 &&
+      messages[messages.length - 1].content &&
+      regex.test(conversations[convIndexRef.current].name)
+    ) {
+      getNameConvo(messages, convIndexRef.current);
+    }
+  }, [receivingMessage, messages]);
+
   const getNameConvo = async (messagesToPost, index) => {
+    if (getNameConvoController.current) {
+      getNameConvoController.current.abort();
+    }
+
+    getNameConvoController.current = new AbortController();
     const response = await fetch('http://localhost:3000/', {
       method: 'POST',
       headers: {
@@ -175,6 +203,7 @@ function App() {
           content: `Can you please generate a very short name to describe the topic of the previous conversation NOT INCLUDING THIS MESSAGE. Mak sure you don't say anything but the name for the conversation because whatever you respond with will be automatically sent to the server as the name of the conversation. Examples of good names: Grocery Planning, Javascript HTTP Request, Lord Of The Flies Essay, Antonym for Confidence, Books to Read, Saying Hi`,
         },
       ]),
+      signal: getNameConvoController.current.signal,
     });
 
     let assistantResponseText = '';
@@ -203,7 +232,7 @@ function App() {
             return newConversations;
           });
         } catch (e) {
-          console.log(e);
+          console.error(e);
         }
       }
       return reader.read().then(processText);
@@ -215,18 +244,6 @@ function App() {
     addUserMessage(message);
     setMessage('');
   };
-
-  useEffect(() => {
-    const regex = /^New Chat \d+$/;
-    if (
-      messages.length >= 2 &&
-      !receivingMessage &&
-      messages[messages.length - 1].content &&
-      regex.test(conversations[convIndex].name)
-    ) {
-      getNameConvo(messages, convIndex);
-    }
-  });
 
   useEffect(() => {
     if (conversations[convIndex]) {
@@ -490,31 +507,65 @@ function App() {
               <div></div>
               <div id={Styles.bottomCenter}>
                 {messages.length > 0 ? (
-                  <button
-                    id={Styles.regenerateBtn}
-                    onClick={() => {
-                      let newMessages = [...messages];
-                      newMessages.splice(-1, 1);
-                      postMessages(newMessages);
-                    }}
-                  >
-                    <svg
-                      stroke='currentColor'
-                      fill='none'
-                      stroke-width='1.5'
-                      viewBox='0 0 24 24'
-                      stroke-linecap='round'
-                      stroke-linejoin='round'
-                      height='1em'
-                      width='1em'
-                      xmlns='http://www.w3.org/2000/svg'
-                    >
-                      <polyline points='1 4 1 10 7 10'></polyline>
-                      <polyline points='23 20 23 14 17 14'></polyline>
-                      <path d='M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15'></path>
-                    </svg>
-                    Regenerate Response
-                  </button>
+                  <>
+                    {receivingMessage ? (
+                      <button
+                        id={Styles.stopReceivingButton}
+                        onClick={() => {
+                          postMessagesController.current.abort();
+                        }}
+                      >
+                        <svg
+                          stroke='currentColor'
+                          fill='none'
+                          stroke-width='1.5'
+                          viewBox='0 0 24 24'
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          class='h-3 w-3'
+                          height='1em'
+                          width='1em'
+                          xmlns='http://www.w3.org/2000/svg'
+                        >
+                          <rect
+                            x='3'
+                            y='3'
+                            width='18'
+                            height='18'
+                            rx='2'
+                            ry='2'
+                          ></rect>
+                        </svg>
+                        Stop generating
+                      </button>
+                    ) : (
+                      <button
+                        id={Styles.regenerateBtn}
+                        onClick={() => {
+                          let newMessages = [...messages];
+                          newMessages.splice(-1, 1);
+                          postMessages(newMessages);
+                        }}
+                      >
+                        <svg
+                          stroke='currentColor'
+                          fill='none'
+                          stroke-width='1.5'
+                          viewBox='0 0 24 24'
+                          stroke-linecap='round'
+                          stroke-linejoin='round'
+                          height='1em'
+                          width='1em'
+                          xmlns='http://www.w3.org/2000/svg'
+                        >
+                          <polyline points='1 4 1 10 7 10'></polyline>
+                          <polyline points='23 20 23 14 17 14'></polyline>
+                          <path d='M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15'></path>
+                        </svg>
+                        Regenerate Response
+                      </button>
+                    )}
+                  </>
                 ) : (
                   <div></div>
                 )}

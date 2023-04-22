@@ -1,5 +1,5 @@
 import React from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import SyntaxHighlighterStyles from '../styles/SyntaxHighlighterStyles';
 import Styles from '../styles/Message.module.css';
 

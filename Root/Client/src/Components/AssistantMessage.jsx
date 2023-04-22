@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import Styles from '../styles/Message.module.css';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import SyntaxHighlighterStyles from '../styles/SyntaxHighlighterStyles';
 import CodeBlock from './CodeBlock';
 
 function AssistantMessage({ children }) {

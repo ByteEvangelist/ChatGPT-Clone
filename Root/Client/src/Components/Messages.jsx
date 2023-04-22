@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import Styles from '../styles/Messages.module.css';
 
 function Messages({ children }) {
