@@ -104,7 +104,7 @@ function App() {
     }
 
     postMessagesController.current = new AbortController();
-    const response = await fetch('http://localhost:3000/', {
+    const response = await fetch(import.meta.env.VITE_BACKEND_SERVER_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -185,7 +185,7 @@ function App() {
     }
 
     getNameConvoController.current = new AbortController();
-    const response = await fetch('http://localhost:3000/', {
+    const response = await fetch(import.meta.env.VITE_BACKEND_SERVER_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
