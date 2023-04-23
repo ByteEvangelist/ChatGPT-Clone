@@ -2,6 +2,7 @@ import { Configuration, OpenAIApi } from 'openai';
 import { createParser } from 'eventsource-parser';
 import dotenv from 'dotenv';
 import express from 'express';
+import cors from 'cors';
 dotenv.config();
 
 const app = express();
@@ -11,7 +12,7 @@ const configuration = new Configuration({
 });
 
 const openai = new OpenAIApi(configuration);
-
+app.use(cors());
 app.use(express.json());
 app.post('/', async (req, res) => {
   console.log('post');

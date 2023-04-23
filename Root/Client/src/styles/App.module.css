@@ -19,10 +19,14 @@
   align-items: center;
   margin: 8px;
   margin-bottom: 0;
+  font-weight: 510;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 #newchat > svg {
-  color: rgb(217, 217, 227);
+  color: white;
+  stroke-width: 2;
 }
 
 .sidebar {
@@ -31,7 +35,7 @@
   background-color: #202123;
   padding: 0;
   display: grid;
-  row-gap: 6px;
+  row-gap: 4px;
   grid-template-rows: min-content 1fr max-content;
 }
 
@@ -43,7 +47,7 @@
 
 #bottomBarTop {
   display: grid;
-  grid-template-columns: 3fr 6fr 3fr;
+  grid-template-columns: 3fr 5fr 3fr;
   width: 100%;
 }
 
@@ -79,13 +83,16 @@
   padding: 8px;
   cursor: pointer;
   text-align: center;
-  background-color: #40414f;
+  background-color: #343541;
   color: white;
   border: 1px solid #565869;
   display: flex;
   flex-direction: row;
   column-gap: 8px;
   align-items: center;
+}
+#regenerateButton:hover {
+  background-color: #40414f;
 }
 
 #stopReceivingButton {
@@ -176,6 +183,7 @@
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-weight: 500;
 }
 
 .editConvoName {

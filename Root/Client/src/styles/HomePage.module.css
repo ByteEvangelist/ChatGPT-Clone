@@ -3,6 +3,8 @@
   text-align: center;
   font-weight: 600;
   font-size: 36;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .SubHeader {
@@ -34,7 +36,7 @@
 #centerDiv {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  width: 50%;
+  width: 45%;
   gap: 14px;
 }
 
