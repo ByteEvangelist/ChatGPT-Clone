@@ -65,7 +65,9 @@ function App() {
   }, [conversations]);
 
   useEffect(() => {
-    updateConversation(convIndex, messages);
+    if (conversations.length > 1) {
+      updateConversation(convIndex, messages);
+    }
   }, [messages]);
 
   const addUserMessage = (msg) => {
@@ -90,7 +92,7 @@ function App() {
       let updatedMessages = [...prevMessages];
       updatedMessages.splice(index, 1, messageToEdit);
       if (messageToEdit.role === 'user') {
-        console.log('user');
+        console.error('cannot edit usermessage yet');
       }
       return updatedMessages;
     });
@@ -139,18 +141,15 @@ function App() {
         if (lines[i].startsWith(':')) continue; // ignore comment message
         if (lines[i] === 'data: [DONE]') {
           setReceivingMessage(false);
-          console.log('done');
           reader.cancel();
           return;
         } // end of message
         try {
           let json = JSON.parse(lines[i]);
           assistantResponseText = assistantResponseText + json.data;
-          console.log(convIndexRef.current, index);
           if (convIndexRef.current == index) {
             editMessage(messagesToPost.length, assistantResponseText);
           } else {
-            console.log('safhldjk');
             setConversations((convs) => {
               let newConvs = [...convs];
               newConvs[index].msgs = [...newConvs[index].msgs];
@@ -523,7 +522,6 @@ function App() {
                           viewBox='0 0 24 24'
                           stroke-linecap='round'
                           stroke-linejoin='round'
-                          class='h-3 w-3'
                           height='1em'
                           width='1em'
                           xmlns='http://www.w3.org/2000/svg'
