@@ -512,6 +512,7 @@ function App() {
                       <button
                         id={Styles.stopReceivingButton}
                         onClick={() => {
+                          setReceivingMessage(false);
                           postMessagesController.current.abort();
                         }}
                       >
