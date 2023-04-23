@@ -100,13 +100,17 @@
   padding: 8px;
   cursor: pointer;
   text-align: center;
-  background-color: #40414f;
+  background-color: #343541;
   color: white;
   border: 1px solid #565869;
   display: flex;
   flex-direction: row;
   column-gap: 8px;
   align-items: center;
+}
+
+#stopReceivingButton:hover {
+  background-color: #40414f;
 }
 
 #input {
