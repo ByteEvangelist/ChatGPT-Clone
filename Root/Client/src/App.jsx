@@ -642,7 +642,8 @@ function App() {
               <div></div>
             </div>
             <div id={Styles.bottomBarBottom}>
-              ChatGPT Clone developed with love from your moms bedroom.
+              ChatGPT Clone developed by the Byte Evangelist in the second
+              coming.
             </div>
           </div>
         </div>
