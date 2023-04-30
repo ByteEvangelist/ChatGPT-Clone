@@ -7,31 +7,40 @@ import HomePage from './Components/HomePage';
 import Messages from './Components/Messages';
 
 function App() {
-  const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState('');
-  const [convIndex, setConvIndex] = useState(0);
-  const convIndexRef = useRef(0);
-  const [conversations, setConversations] = useState([]);
-  const [reversedConvs, setReversedConvs] = useState([]);
-  const [editId, setEditId] = useState(-1);
-  const [editText, setEditText] = useState('');
+  const [messages, setMessages] = useState([]); // message currently being displayed
+  const [message, setMessage] = useState(''); // text in input box
+  const [convIndex, setConvIndex] = useState(0); // index of current conversation in conversations array
+  // usefull for function where state changes mid function
+  const convIndexRef = useRef(0); // ref var of current conversation in conversations array
+  const [conversations, setConversations] = useState([]); // array of all conversations
+  // used to display conversations in order from top (newest) to bottom (oldest) in sidebar
+  const [reversedConvs, setReversedConvs] = useState([]); // copy of conversations array in reverse order
+  const [editId, setEditId] = useState(-1); // index of conversation to edit name of
+  const [editText, setEditText] = useState(''); // text in editname input
   const messagesOuterDiv = useRef(null);
-  const [receivingMessage, setReceivingMessage] = useState(false);
-  const postMessagesController = useRef(null);
-  const getNameConvoController = useRef(null);
+  const [receivingMessage, setReceivingMessage] = useState(false); // currently streaming in response from ai or not
+  const postMessagesController = useRef(null); // used to stop response from ai for chat
+  const getNameConvoController = useRef(null); // used to stop response from ai for renaming convos
 
   const newConversation = () => {
+    // adds new conversation to array
     setConversations((convs) => {
       let newConvs = [
         ...convs,
         { name: 'New Chat ' + (convs.length + 1), msgs: [] },
       ];
+      // sets the convIndex etc to the new conversation index
       setCurrentConversation(convs.length, newConvs);
       return newConvs;
     });
   };
 
+  /*  
+    used to sync messages with current conversation variable
+    used to update messages of conversations when a dif conversation is on screen 
+  */
   const updateConversation = (i, msgs) => {
+    //change the messages in a conversation i being the index of the convo to change and msgs the messages to update it to
     setConversations((convs) => {
       let updatedConversations = [...convs];
       updatedConversations[i].msgs = [...msgs];
@@ -39,33 +48,45 @@ function App() {
     });
   };
 
+  /* 
+    update the current conversation to the conversation at i (index) in the conversations array
+    set messages to the ones at i (index) in the updated conversations array (convs)
+  */
   const setCurrentConversation = (i, convs) => {
-    convIndexRef.current = i;
-    setConvIndex(i);
-    setMessages(convs[i].msgs);
+    convIndexRef.current = i; // ref holding index of current convo
+    setConvIndex(i); // state holding current index of current convo
+    setMessages(convs[i].msgs); // set current messages on screen to those in the current convo
   };
 
+  // if there are conversations in local storage load them if not make a new convo to start
   useEffect(() => {
     if (conversations.length < 1) {
       if (localStorage.getItem('conversations') !== null) {
-        setConversations(JSON.parse(localStorage.getItem('conversations')));
+        setConversations(JSON.parse(localStorage.getItem('conversations'))); // set conversations to those in localstorage
+        // set current conversation to newest in local storage
         setCurrentConversation(
-          JSON.parse(localStorage.getItem('conversations')).length - 1,
-          JSON.parse(localStorage.getItem('conversations'))
+          JSON.parse(localStorage.getItem('conversations')).length - 1, // set currentconvo index to the newest one in local storage
+          // used so setCurrentConversation has the updated convos so it can set the messages to the newest convo
+          JSON.parse(localStorage.getItem('conversations')) // convs from local storage
         );
       } else {
-        newConversation();
+        newConversation(); // make new convo if none in local storage
       }
     }
   }, []);
 
+  /*
+    when the conversations array is updated set the reversedConversations array to the reverse of conversations
+    used to display conversations in order from top (newest) to bottom (oldest) in sidebar
+    when conversations array is updated store it in localstorage
+  */
   useEffect(() => {
-    setReversedConvs([...conversations].reverse());
-    localStorage.setItem('conversations', JSON.stringify(conversations));
+    setReversedConvs([...conversations].reverse()); // set the reversedConversations array to the reverse of conversations
+    localStorage.setItem('conversations', JSON.stringify(conversations)); // store conversations in localstorage
   }, [conversations]);
 
   useEffect(() => {
-    if (conversations.length > 1) {
+    if (conversations.length >= 1) {
       updateConversation(convIndex, messages);
     }
   }, [messages]);
@@ -113,7 +134,7 @@ function App() {
       body: JSON.stringify([
         {
           role: 'system',
-          content: `All the responses you generate are displayed by a commonmark markdown renderer, use this to display images code headings etc. If a user asks for an image you can use commonmark syntax to display it, if a user asks you to give them a link to something use commonmark syntax to display it. If you write code it is going through prismjs to render it so you always have to specify what programming language the code is, if it isn't a programming language the language is plaintext.`,
+          content: `All the responses you generate are displayed by a commonmark markdown renderer, use this to display images, code headings, links etc. Make sure to never put a link that is not in markdown syntax. If a user asks for an image you can use commonmark syntax to display it, if a user asks you to give them a link to something use commonmark syntax to display it. If you write code it is going through prismjs to render it so you always have to specify what programming language the code is, if it isn't a programming language the language is plaintext.`,
         },
         ...messagesToPost,
       ]),
@@ -395,12 +416,23 @@ function App() {
                       </button>
                       <button
                         onClick={() => {
+                          if (postMessagesController.current) {
+                            postMessagesController.current.abort();
+                          }
                           setConversations((convs) => {
                             let newConversations = [...convs];
                             newConversations.splice(
                               conversations.length - index - 1,
                               1
                             );
+                            if (conversations.length - 1 < 1) {
+                              newConversation();
+                            } else {
+                              setCurrentConversation(
+                                convIndexRef.current - 1,
+                                convs
+                              );
+                            }
                             return newConversations;
                           });
                         }}
