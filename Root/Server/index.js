@@ -1,5 +1,6 @@
 // todo: replace with text decoder and reader
 import { createParser } from 'eventsource-parser'; // used for parsing stream from openai
+import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 import express from 'express'; //better than native http
 // todo: add allowed domains to env so not all domains can make requests
@@ -10,6 +11,37 @@ const app = express(); // initialize express
 
 app.use(cors()); // allow requests from anywhere so frontend can be hosted on seperate url
 app.use(express.json()); // parses json in body of post requests to express allows us to send data as json from frontend
+
+// used for testing server statuses etc. without making a post request
+app.get('/', async (req, res) => {
+  let response;
+  try {
+    // test request to openai that just lists the models
+    response = await fetch('https://api.openai.com/v1/models', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`, // attach api key
+      },
+    });
+    // await response
+    let json = await response.json();
+    // if receive error send back that openai isn't responding and the error
+    if (json.error) {
+      res.send(
+        `<ul><li>server online ✅</li><li>openai not responding ❌ (error: ${json.error.code})</li></ul>`
+      );
+    } else {
+      res.send(
+        '<ul><li>server online ✅</li><li>openai responding ✅</li></ul>'
+      );
+    }
+  } catch (error) {
+    console.error('Fetch error: ', error);
+    res.send(
+      `<ul><li>server online ✅</li><li>openai fetch error ❌ (fetch error: ${error})</li></ul>`
+    );
+  }
+});
 
 // on post request received (from frontend)
 app.post('/', async (req, res) => {
@@ -82,6 +114,6 @@ app.post('/', async (req, res) => {
 });
 
 // start server
-app.listen(3000, () => {
-  console.log('Server started on port 3000');
+app.listen(process.env.PORT, () => {
+  console.log(`Server started on port ${process.env.PORT}`);
 });
