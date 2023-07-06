@@ -638,8 +638,12 @@ function App() {
               <div></div>
             </div>
             <div id={Styles.bottomBarBottom}>
-              ChatGPT Clone developed by the Byte Evangelist in the second
-              coming.
+              Currently running 13b version of wizard-vicuna-uncensored&nbsp;
+              <a href='https://huggingface.co/TheBloke/Wizard-Vicuna-13B-Uncensored-HF'>
+                Here
+              </a>
+              &nbsp; if you want a better model like the 33b 40b or 65b version
+              or want it to run faster consider donating <a>&nbsp;Here&nbsp;</a>
             </div>
           </div>
         </div>
