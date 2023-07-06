@@ -53,12 +53,12 @@ async function handleRequest(req, res) {
                 reqBody
                   .map((obj) => {
                     if (obj.role == 'user') {
-                      return 'User:' + obj.content;
+                      return 'User:' + obj.content + '\n';
                     } else {
                       if (obj.role == 'system') {
-                        return obj.content;
+                        return obj.content + '\n';
                       } else {
-                        return 'Assistant:' + obj.content;
+                        return 'Assistant:' + obj.content + '\n';
                       }
                     }
                   })
@@ -76,7 +76,7 @@ async function handleRequest(req, res) {
                 top_p: 0.95,
                 truncate: null,
                 typical_p: 0.95,
-                watermark: true,
+                watermark: false,
               },
             }),
             timeout: 60000, // Timeout value in milliseconds
@@ -109,8 +109,15 @@ async function handleRequest(req, res) {
       let newlineIndex = accumulatedData.indexOf('\n');
       while (newlineIndex !== -1) {
         const fullChunk = accumulatedData;
+
         if (fullChunk.length > 1) {
           try {
+            if (JSON.parse(fullChunk.slice(5)).details != undefined) {
+              console.log('done');
+              writer.write(encoder.encode('data: [DONE]'));
+              writer.close();
+              return Promise.resolve();
+            }
             console.log(
               'fullchunk:' +
                 fullChunk.length +
@@ -124,16 +131,11 @@ async function handleRequest(req, res) {
                 })}\n\n`
               )
             );
-            if (JSON.parse(fullChunk.slice(5)).details != undefined) {
-              console.log('done');
-              writer.write(encoder.encode('data: [DONE]'));
-              writer.close();
-              return Promise.resolve();
-            }
           } catch (error) {
             console.log(error.message);
           }
         }
+
         accumulatedData = accumulatedData.slice(newlineIndex + 1);
         newlineIndex = accumulatedData.indexOf('\n');
       }

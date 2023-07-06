@@ -1,0 +1,45 @@
+.TopBar {
+  background-color: #343541;
+  border-bottom: solid 1px rgba(255, 255, 255, 0.2);
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  color: #d9d9e3;
+}
+
+.buttonDivLeft {
+  flex-grow: 1;
+}
+.buttonDivRight {
+  flex-grow: 1;
+  display: flex;
+  justify-content: right;
+}
+
+.buttonLeft {
+  padding: 0;
+  margin: 3px;
+  border: 0;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgb(217, 217, 227);
+  margin-left: 25px;
+  margin-right: 25px;
+}
+.buttonRight {
+  padding: 0;
+  margin: 3px;
+  border: 0;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: rgb(217, 217, 227);
+  margin-left: 25px;
+  margin-right: 25px;
+}

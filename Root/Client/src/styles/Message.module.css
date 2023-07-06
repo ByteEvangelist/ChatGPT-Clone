@@ -52,7 +52,7 @@ code:not([class]) {
   padding-left: 0;
   padding-right: 0;
   display: grid;
-  grid-template-columns: 3fr 5fr 3fr;
+  grid-template-columns: 1fr min(100%, 750px) 1fr;
   line-height: 24px;
   font-size: 16px;
 }
@@ -66,7 +66,7 @@ code:not([class]) {
   padding-left: 0;
   padding-right: 0;
   display: grid;
-  grid-template-columns: 3fr 5fr 3fr;
+  grid-template-columns: 1fr min(100%, 750px) 1fr;
 }
 
 p {
@@ -116,6 +116,7 @@ p {
 .pfpWrapper {
   height: 100%;
   width: fit-content;
+  margin-left: 25px;
 }
 
 .assistantLogo {

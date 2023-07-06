@@ -4,41 +4,6 @@
   width: 100%;
 }
 
-#newchat {
-  background-color: transparent;
-  width: calc(100% - 16px);
-  border: rgba(255, 255, 255, 0.2) 1px solid;
-  color: white;
-  border-radius: 0.425rem;
-  padding: 12px;
-  cursor: pointer;
-  text-align: left;
-  display: flex;
-  flex-direction: row;
-  column-gap: 12px;
-  align-items: center;
-  margin: 8px;
-  margin-bottom: 0;
-  font-weight: 510;
-  font-size: 14px;
-  line-height: 20px;
-}
-
-#newchat > svg {
-  color: white;
-  stroke-width: 2;
-}
-
-.sidebar {
-  width: 100%;
-  height: 100vh;
-  background-color: #202123;
-  padding: 0;
-  display: grid;
-  row-gap: 4px;
-  grid-template-rows: min-content 1fr max-content;
-}
-
 .messagesOuterContainer {
   background-color: #343642;
   height: 100vh;
@@ -46,8 +11,8 @@
 }
 
 #bottomBarTop {
-  display: grid;
-  grid-template-columns: 3fr 5fr 3fr;
+  display: flex;
+  justify-content: center;
   width: 100%;
 }
 
@@ -116,10 +81,12 @@
 #input {
   border: rgba(32, 33, 35, 0.5) 1px solid;
   border-radius: 6px;
-  width: 100%;
   background-color: #40414f;
   padding: 12px;
   box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.11);
+  width: min(95%, 768px);
+  box-sizing: border-box;
+  margin-right: 10px;
 }
 
 #inputTextArea {
@@ -163,126 +130,12 @@
   align-items: center;
 }
 
-.conversationButton {
-  background-color: transparent;
-  width: calc(100% - 16px);
-  border: 0;
-  color: white;
-  border-radius: 0.425rem;
-  padding: 12px;
-  cursor: pointer;
-  text-align: left;
-  display: grid;
-  grid-template-columns: min-content 12px 1fr max-content min-content;
-  align-items: center;
-  line-height: 20px;
-  font-size: 14px;
-  margin: 8px;
-  margin-top: 0;
-}
-
-.conversationButton > p {
-  max-width: 100%;
-  white-space: nowrap; /* keep the text on one line */
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-weight: 500;
-}
-
-.editConvoName {
-  padding: 0;
-  margin: 3px;
-  border: 0;
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.editConvoName > svg {
-  color: rgb(217, 217, 227);
-}
-
-.convoButtons {
-  display: flex;
-  flex-direction: row;
-}
-
-.deleteConvo {
-  padding: 0;
-  margin: 3px;
-  border: 0;
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.editNameInput {
-  background-color: transparent;
-  color: white;
-  border: blue 1px solid;
-  outline: none;
-  width: min-content;
-  padding: 0;
-}
-
-.deleteConvo > svg {
-  color: rgb(217, 217, 227);
-}
-
-.conversationButton > svg {
-  color: rgb(217, 217, 227);
-}
-
-.conversationButton:hover {
-  background-color: rgb(42, 43, 50);
-}
-
-#clearConversations:hover {
-  background-color: rgb(42, 43, 50);
-}
-
-#conversationsList {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1px;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  border-bottom: rgba(255, 255, 255, 0.2) solid 1px;
-  overflow-y: auto;
-}
-
-.sidebarOptions {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  row-gap: 1px;
-  overflow-y: auto;
-  width: 100%;
-  padding: 0;
-  border: 0;
-}
-
-#clearConversations {
-  background-color: transparent;
-  width: calc(100% - 16px);
-  border: 0;
-  color: white;
-  border-radius: 0.425rem;
-  padding: 12px;
-  cursor: pointer;
-  text-align: left;
-  display: flex;
-  flex-direction: row;
-  column-gap: 8px;
-  align-items: center;
-  line-height: 20px;
-  margin: 8px;
-  margin-top: 0px;
-  font-size: 14px;
+@media screen and (max-width: 786px) {
+  .container {
+    grid-template-columns: auto;
+    grid-template-rows: 40px 1fr;
+  }
+  #bottomBar {
+    width: 100%;
+  }
 }

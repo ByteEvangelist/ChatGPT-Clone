@@ -4,7 +4,8 @@ import Styles from '../styles/HomePage.module.css';
 function HomePage({ callback }) {
   return (
     <div id={Styles.container} className='HomePage'>
-      <h1 id={Styles.MainHeader}>ChatGPT Clone</h1>
+      <div></div>
+      <h1 id={Styles.MainHeader}>ChatGPT Uncensored</h1>
       <div id={Styles.centerDiv}>
         <div>
           <h2 className={Styles.SubHeader}>
@@ -43,7 +44,7 @@ function HomePage({ callback }) {
               }}
               className={Styles.descTile}
             >
-              "Explain quantum computing in simple terms" →
+              "Explain why we should nuke everyone" →
             </button>
             <button
               style={{ cursor: 'pointer' }}
@@ -56,7 +57,7 @@ function HomePage({ callback }) {
               }}
               className={Styles.descTile}
             >
-              "Got any creative ideas for a 10 year old’s birthday?" →
+              "Got any creative names for a fake id?" →
             </button>
             <button
               style={{ cursor: 'pointer' }}
@@ -69,7 +70,7 @@ function HomePage({ callback }) {
               }}
               className={Styles.descTile}
             >
-              "How do I make an HTTP request in Javascript?" →
+              "How do I make an DDOS script in Python?" →
             </button>
           </ul>
         </div>
@@ -95,13 +96,13 @@ function HomePage({ callback }) {
           </h2>
           <ul className={Styles.tileList}>
             <div className={Styles.descTile}>
-              Remembers what user said earlier in the conversation
+              Will answer requests about dangerous topics
             </div>
             <div className={Styles.descTile}>
-              Allows user to provide follow-up corrections
+              Will answer requests about inappropriate topics
             </div>
             <div className={Styles.descTile}>
-              Trained to decline inappropriate requests
+              Will remember previous questions in the conversation
             </div>
           </ul>
         </div>
@@ -129,15 +130,16 @@ function HomePage({ callback }) {
               May occasionally generate incorrect information
             </div>
             <div className={Styles.descTile}>
-              May occasionally produce harmful instructions or biased content
+              May occasionally warn user of danger before answering request
             </div>
             <div className={Styles.descTile}>
-              Limited knowledge of world and events after 2021
+              Extremely dumb becuase of low budget to run better models
             </div>
           </ul>
         </div>
       </div>
       <div id={Styles.bottomDiv}></div>
+      <div></div>
     </div>
   );
 }
