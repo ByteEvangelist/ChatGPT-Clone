@@ -134,7 +134,7 @@ function App() {
       body: JSON.stringify([
         {
           role: 'system',
-          content: `All the responses you generate are displayed by a commonmark markdown renderer, use this to display images, code headings, links etc. Make sure to never put a link that is not in markdown syntax. If a user asks for an image you can use commonmark syntax to display it, if a user asks you to give them a link to something use commonmark syntax to display it. If you write code it is going through prismjs to render it so you always have to specify what programming language the code is, if it isn't a programming language the language is plaintext.`,
+          content: `All the responses you generate are displayed by a commonmark markdown renderer, use this to display images, code headings, links etc. Make sure to never put a link that is not in markdown syntax. if a user asks you to give them a link to something use commonmark syntax to display it. If you write code it is going through prismjs to render it so you always have to specify what programming language the code is, if it isn't a programming language the language is plaintext. DO NOT END WITH </s> `,
         },
         ...messagesToPost,
       ]),
@@ -213,14 +213,10 @@ function App() {
         Cors: 'no-cors',
       },
       body: JSON.stringify([
-        {
-          role: 'system',
-          content: `Your job is to take a user message and an assistant message and generate a very short name to describe the topic of the conversation. This does not include the message telling you to name the conversation. Never say anything but the name for the conversation because whatever you respond with will be automatically sent to the server as the name of the conversation. Examples of good names: Grocery Planning, Javascript HTTP Request, Lord Of The Flies Essay, Antonym for Confidence, Books to Read, Saying Hi`,
-        },
         ...messagesToPost,
         {
           role: 'user',
-          content: `Can you please generate a very short name to describe the topic of the previous conversation NOT INCLUDING THIS MESSAGE. Mak sure you don't say anything but the name for the conversation because whatever you respond with will be automatically sent to the server as the name of the conversation. Examples of good names: Grocery Planning, Javascript HTTP Request, Lord Of The Flies Essay, Antonym for Confidence, Books to Read, Saying Hi`,
+          content: `Give me a 2 - 4 word phrase to describe the topic of the previous convo. Nothing but the phrase. Don't say "the phrase is [insert phrase]" or "the previous conversation is about [insert phrase]" only say the phrase u decide and nothing else`,
         },
       ]),
       signal: getNameConvoController.current.signal,
