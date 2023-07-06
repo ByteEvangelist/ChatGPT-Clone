@@ -3,7 +3,7 @@
   border-bottom: solid 1px rgba(255, 255, 255, 0.2);
   text-align: center;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr max-content 1fr;
   align-items: center;
   color: #d9d9e3;
 }

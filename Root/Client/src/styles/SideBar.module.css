@@ -176,3 +176,25 @@
   margin-top: 0px;
   font-size: 14px;
 }
+
+#github {
+  background-color: transparent;
+  width: calc(100% - 16px);
+  border: 0;
+  color: white;
+  border-radius: 0.425rem;
+  padding: 12px;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
+  align-items: center;
+  line-height: 20px;
+  margin: 8px;
+  margin-top: 0px;
+  font-size: 14px;
+}
+#github:hover {
+  background-color: rgb(42, 43, 50);
+}

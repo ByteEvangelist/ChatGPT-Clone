@@ -34,8 +34,8 @@ function TopBar(props) {
         </button>
       </div>
       <p>
-        {props.convIndexRef.current
-          ? props.conversations[props.convIndexRef.current].name
+        {props.convIndex != undefined
+          ? props.conversations[props.convIndex].name
           : ''}
       </p>
       <div className={Styles.buttonDivRight}>

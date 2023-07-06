@@ -317,6 +317,7 @@ function App() {
               conversations={conversations}
               convIndexRef={convIndexRef}
               setMessage={setMessage}
+              convIndex={convIndex}
               newConversation={newConversation}
             />
             {mobileSideBarActive ? (
