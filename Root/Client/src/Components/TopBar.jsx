@@ -34,7 +34,7 @@ function TopBar(props) {
         </button>
       </div>
       <p>
-        {props.convIndex != undefined
+        {props.conversations[props.convIndex] != undefined
           ? props.conversations[props.convIndex].name
           : ''}
       </p>
