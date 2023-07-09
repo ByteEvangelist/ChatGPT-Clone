@@ -6,4 +6,4 @@
 - Local llms hosted with HuggingFaces [text-generation-inference](https://github.com/huggingface/text-generation-inference)
 - Local llm proxy edge function will not run on dedicated server or non-cloudflare runtimes.
 
-official instance [here](https://chatgpt-clone-e5f.pages.dev/)
+[](https://chatgpt-clone-e5f.pages.dev/)
