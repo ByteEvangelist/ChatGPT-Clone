@@ -470,8 +470,8 @@ function App() {
               </div>
             </div>
             <div id={Styles.bottomBarBottom}>
-              Currently running 13b version of wizard-vicuna-uncensored&nbsp;
-              <a href='https://huggingface.co/TheBloke/Wizard-Vicuna-13B-Uncensored-HF'>
+              Currently running 7b version of wizard-vicuna-uncensored&nbsp;
+              <a href='https://huggingface.co/TheBloke/Wizard-Vicuna-7B-Uncensored-HF'>
                 Here
               </a>
               &nbsp; if you want a better model like the 33b 40b or 65b version
